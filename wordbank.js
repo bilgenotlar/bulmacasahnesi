@@ -16,6 +16,7 @@ const CATEGORIES = {
     bilim: 'Bilim',
     populer_kultur: 'Popüler Kültür',
     sinema: 'Sinema',
+	gokbilim: 'Gökbilim',
     edebiyat: 'Edebiyat',
     astronomi: 'Astronomi',
     cografya: 'Coğrafya',
@@ -34,6 +35,36 @@ const CATEGORIES = {
 
 const RAW_WORDS = {
     bilim: `
+	ABİYOGENEZ | cansız maddelerden doğal yollarla ve kimyasal evrim süreciyle canlılığın ortaya çıkmasını açıklayan bilimsel teori
+ABİYOTİK | ekosistemde canlı olmayan, cansız çevreye ve bileşenlere özgü olan durum veya etken
+ABİYOZ | canlılık belirtilerinin bulunmaması, yaşamın noksanlığı ve yokluğu durumunu ifade eden biyoloji terimi
+AKUSTİK | ses dalgalarının oluşumunu, yayılımını, duyulmasını ve özelliklerini inceleyen fizik alt dalı
+APATİ | nöroloji ve psikolojide duygusal tepkisizlik, çevreye karşı aşırı ilgisizlik ve hissizlik hali
+ATOM | kimyasal elementlerin tüm özelliklerini taşıyan, çekirdek ve elektronlardan oluşan en küçük yapı taşı
+BİYOSFER | Yeryüzünde canlıların yaşadığı atmosfer, karalar ve sulardan oluşan küresel yaşam katmanı
+BOTANİK | bitkilerin yapısını, büyümesini, beslenmesini ve sınıflandırılmasını inceleyen biyoloji dalı
+DORMANSİ | bitki tohumları ve tomurcuklarında olumsuz çevre koşullarında büyümenin geçici olarak durduğu uyku hali
+DOKU | canlılarda benzer yapı ve işleve sahip hücrelerin bir araya gelerek oluşturduğu biyolojik birim
+EKOLOJİ | canlıların birbirleriyle ve cansız çevreleriyle olan karmaşık ilişkilerini inceleyen bilim dalı
+ELEKTRON | atom çekirdeği etrafında dönen, negatif elektrik yüküne sahip temel atom altı parçacık
+EMBRİYO | döllenmiş yumurtanın gelişmesiyle oluşan ve organlaşma evresindeki erken canlı taslağı
+ENZİM | canlı organizmalardaki biyokimyasal tepkimelerin hızını artıran biyolojik katalizör protein
+FOSİL | jeolojik devirlerde yaşamış canlıların kayaçlar içinde korunarak günümüze ulaşan kalıntısı veya izi
+FOTON | elektromanyetik radyasyonun ve ışığın temel yapı taşı olan kütlesiz enerji paketi
+GALAKSİ | kütle çekimiyle birbirine bağlı milyarlarca yıldız, gaz ve toz bulutundan oluşan devasa gök sistemi
+HORMON | iç salgı bezleri tarafından üretilip kan yoluyla hedef organlara taşınan düzenleyici kimyasal
+HÜCRE | tüm canlıların yapısını oluşturan, bağımsız yaşam yeteneğine sahip en küçük biyolojik birim
+KROMOZOM | hücre çekirdeğinde bulunan ve genetik bilgiyi taşıyan DNA ile protein kompleksinden oluşan yapı
+KULUÇKA | yumurtalı canlıların embriyo gelişimini tamamlaması için gereken sıcaklık ve nem ortamında bekleme süreci
+MUKUS | canlı organlarını korumak, nemli tutmak ve yabancı maddeleri tutmak için salgılanan kaygan sıvı
+OPTİK | ışığın doğasını, yayılmasını, kırılmasını ve maddeyle etkileşimini inceleyen fizik dalı
+PARSEK | astronomide gök cisimleri arasındaki devasa uzaklıkları ölçmede kullanılan ve yaklaşık 3,26 ışık yılına denk gelen mesafe birimi
+PESTİSİT | tarım ürünlerine zarar veren böcek, ot ve mantar gibi organizmaları engellemek veya yok etmek için kullanılan kimyasal bileşik
+PİGMENT | canlı dokularına renk veren ve belirli dalga boylarındaki ışığı emerek işlev gören kimyasal madde
+POLEN | çiçekli bitkilerde erkek üreme hücresini taşıyan ve tozlaşmayı sağlayan mikro boyuttaki tanecik
+PROKARYOT | belirgin bir hücre çekirdeği ve zarla çevrili organelleri bulunmayan tek hücreli canlı türü
+RETİNOL | görme işlevinde ve hücre büyümesinde temel rol oynayan A vitamininin biyolojik olarak aktif ana formu
+STOMA | bitkilerin yapraklarında gaz alışverişini ve terlemeyi denetleyen açılıp kapanabilir gözenek yapısı
         ATOM | Maddenin kimyasal özelliklerini taşıyan en küçük yapı taşı
         LAZER | Yoğunlaştırılmış tek renkli ve eş evreli ışık demeti
         ELEKTRON | Atom çekirdeğinin çevresinde dönen negatif yüklü parçacık
@@ -75,6 +106,38 @@ const RAW_WORDS = {
         SPOİLER | Bir eserin sürpriz gelişmelerini önceden ele veren bilgi
         REYTİNG | Televizyon programlarının izlenme oranı ölçümü
         MARATON | Bir dizinin bölümlerini ara vermeden art arda izleme eylemi
+    `,
+ gokbilim: `
+ASTEROİT | Güneş etrafında dolanan, gezegenlerden küçük, kayaç veya metal yapılı gök cismi.
+ASTRONOMİ | gök cisimlerini, uzayı ve evrenin fiziki yapısını inceleyen gök bilim dalı.
+ATMOSFER | bir gök cismini çevreleyen ve kütle çekimi sayesinde dengede duran gaz katmanı.
+CÜCE | kendi kütle çekimiyle küresel biçim almış ancak yörüngesini temizleyememiş küçük gök cismi sınıfı.
+EKSEN | bir gök cisminin kendi etrafındaki dönme hareketini gerçekleştirdiği hayali hat.
+FOTON | elektromanyetik radyasyonun ve ışığın temel yapı taşı olan kütlesiz enerji paketi.
+GALAKSİ | kütle çekimiyle birbirine bağlı milyarlarca yıldız, gaz ve toz bulutundan oluşan dev gök sistemi.
+GEZEGEN | bir yıldız çevresinde dolanan ve kendi kütle çekimiyle küresel biçim kazanmış gök cismi.
+GÖKADA | gaz, toz ve milyarlarca yıldızın kütle çekimiyle bir arada tutulduğu devasa sistem.
+GÖKBİLİM | gök cisimlerinin konumlarını, hareketlerini ve kimyasal yapılarını inceleyen bilim dalı.
+GÖKKÜRE | gözlemcinin merkezde yer aldığı ve tüm gök cisimlerinin üzerinde bulunduğu var sayılan hayali küre.
+GÜNEŞ | Güneş Sistemi'nin merkezinde yer alan ve sıcak plazmadan oluşan orta büyüklükteki yıldız.
+IŞIKYILI | ışığın boşlukta bir dünya yılında katettiği yaklaşık 9,46 trilyon kilometrelik mesafe birimi.
+IŞINIM | enerjinin dalga veya parçacıklar halinde uzayda yayılması süreci.
+KOZMOS | kaosun zıttı olarak evrenin bir düzen ve bütünlük içindeki halini ifade eden terim.
+KRATER | bir gök taşının gezegen veya uydu yüzeyine çarpması sonucu oluşan çanak şeklindeki çukur.
+KUAZAR | uzak galaksilerin merkezinde bulunan ve aşırı miktarda enerji yayan çok parlak çekirdek.
+KUTUP | bir gezegenin dönme ekseninin yüzeyi kestiği en kuzey ve en güney noktalar.
+METEOR | gezegen atmosferine girip sürtünmeyle ısınarak ışık çizgisi oluşturan gök taşı.
+NEBULA | uzayda yeni yıldızların doğduğu yoğun gaz ve toz bulutu.
+PARSEK | gök bilimcilerin yıldızlararası uzaklıkları ölçmek için kullandığı 3,26 ışık yılına denk gelen birim.
+PLAZMA | gaz atomlarının elektronlarını kaybetmesiyle oluşan maddenin yüksek enerjili iyonize hali.
+PULSAR | kendi etrafında hızla dönerek uzaya kütlesel radyo dalgası demetleri yayan nötron yıldızı.
+TAYF | ışığın prizmadan veya kırınım ağından geçerek dalga boylarına göre ayrışması sonucu oluşan renk dizilimi.
+TELESKOP | uzaktaki gök cisimlerinden gelen elektromanyetik radyasyonu toplayıp görüntüleyen araç.
+TUTULMA | bir gök cisminin başka bir gök cisminin gölgesine girmesiyle ışığının geçici olarak kesilmesi.
+TUTULUM | Güneş'in gökküresi üzerinde bir yıl boyunca izlediği hayali dairesel yol.
+UYDU | bir gezegenin kütle çekim etkisinde kalarak onun etrafında belirli bir yörüngede dönen gök cismi.
+YILDIZ | çekirdeğinde gerçekleşen nükleer füzyon tepkimeleri sayesinde çevreye ısı ve ışık saçan plazma küresi.
+YÖRÜNGE | bir gök cisminin kütle çekimi etkisi altında başka bir cisim etrafında izlediği periyodik yol.
     `,
 
     sinema: `
