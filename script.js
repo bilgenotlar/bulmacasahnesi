@@ -1,5 +1,5 @@
 /**
- * Bulmaca Stüdyosu v2.0 - Oyun Kontrolcüsü
+ * Bulmaca Sahnesi (MaviBlue Stüdyo) - Oyun Kontrolcüsü
  */
 
 let engine;
@@ -26,6 +26,8 @@ let gameState = {
 window.addEventListener('DOMContentLoaded', async () => {
     const savedTheme = localStorage.getItem('puzzle-theme') || 'studio';
     changeTheme(savedTheme);
+
+    setupMobileKeyboardListener();
 
     if (typeof loadGoogleSheetsWords === 'function') {
         await loadGoogleSheetsWords();
@@ -156,10 +158,13 @@ function loadPuzzle(puzzle) {
     renderPuzzle();
     updateStatsUI();
 
-    // İlk kelimeyi otomatik seçerek aktif banner'ı doldur
+    // İlk kelimeyi otomatik seçerek aktif banner'ı doldur (açılışta mobil klavyeyi zorlamadan)
     const firstWord = puzzle.across[0] || puzzle.down[0];
     if (firstWord) {
-        selectWord(firstWord);
+        gameState.selectedWord = firstWord;
+        gameState.direction = firstWord.direction;
+        gameState.selectedCell = { row: firstWord.row, col: firstWord.col };
+        highlightSelection();
     }
 }
 
@@ -343,6 +348,7 @@ function selectCell(row, col) {
     gameState.selectedCell = { row, col };
 
     highlightSelection();
+    focusMobileKeyboard();
 }
 
 function selectWord(wordObj) {
@@ -350,6 +356,16 @@ function selectWord(wordObj) {
     gameState.direction = wordObj.direction;
     gameState.selectedCell = { row: wordObj.row, col: wordObj.col };
     highlightSelection();
+    focusMobileKeyboard();
+}
+
+function focusMobileKeyboard() {
+    const mobileInput = document.getElementById('mobile-keyboard-input');
+    if (mobileInput) {
+        // Silme (Backspace) tuşunun boş kutuda da tetiklenmesi için tampon boşluk karakteri
+        mobileInput.value = ' ';
+        mobileInput.focus({ preventScroll: true });
+    }
 }
 
 function highlightSelection() {
@@ -393,29 +409,75 @@ function highlightSelection() {
     }
 }
 
-// === KLAVYE GİRİŞİ ===
+// === MOBİL SANAL KLAVYE DİNLEYİCİSİ (ANDROID & iOS) ===
+function setupMobileKeyboardListener() {
+    const mobileInputEl = document.getElementById('mobile-keyboard-input');
+    if (!mobileInputEl) return;
+
+    mobileInputEl.addEventListener('input', () => {
+        if (!gameState.selectedCell || !gameState.selectedWord) {
+            mobileInputEl.value = ' ';
+            return;
+        }
+
+        const val = mobileInputEl.value;
+        // Tampon boşluk silindiyse (mobilde geri/sil tuşuna basıldıysa)
+        if (val.length === 0) {
+            mobileInputEl.value = ' ';
+            handleBackspace();
+            return;
+        }
+
+        const lastChar = val.slice(-1);
+        mobileInputEl.value = ' ';
+
+        if (/[a-zA-ZçğıöşüÇĞİÖŞÜ]/.test(lastChar)) {
+            handleLetterInput(lastChar);
+        }
+    });
+}
+
+// === ORTAK HARF GİRİŞİ & SİLME İŞLEMLERİ ===
+function handleLetterInput(char) {
+    if (!gameState.selectedCell || !gameState.selectedWord) return;
+    const { row, col } = gameState.selectedCell;
+
+    gameState.userGrid[row][col] = toTurkishUpperCase(char);
+    updateCellDisplay(row, col);
+    moveToNextCell();
+    autoCheckWordIfFilled(gameState.selectedWord);
+    checkPuzzleCompletion();
+}
+
+function handleBackspace() {
+    if (!gameState.selectedCell || !gameState.selectedWord) return;
+    const { row, col } = gameState.selectedCell;
+
+    if (gameState.userGrid[row][col] !== '') {
+        gameState.userGrid[row][col] = '';
+        updateCellDisplay(row, col);
+    } else {
+        moveToPrevCell();
+    }
+}
+
+// === FİZİKSEL KLAVYE GİRİŞİ ===
 document.addEventListener('keydown', (e) => {
     if (!gameState.selectedCell || !gameState.selectedWord) return;
-    if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+    if (e.target.tagName === 'SELECT' || (e.target.tagName === 'INPUT' && e.target.id !== 'mobile-keyboard-input')) return;
 
-    const { row, col } = gameState.selectedCell;
     const key = e.key;
 
     if (key.length === 1 && /[a-zA-ZçğıöşüÇĞİÖŞÜ]/.test(key)) {
         e.preventDefault();
-        gameState.userGrid[row][col] = toTurkishUpperCase(key);
-        updateCellDisplay(row, col);
-        moveToNextCell();
-        autoCheckWordIfFilled(gameState.selectedWord);
-        checkPuzzleCompletion();
+        handleLetterInput(key);
+        const mobileInput = document.getElementById('mobile-keyboard-input');
+        if (mobileInput) mobileInput.value = ' ';
     } else if (key === 'Backspace' || key === 'Delete') {
         e.preventDefault();
-        if (gameState.userGrid[row][col] !== '') {
-            gameState.userGrid[row][col] = '';
-            updateCellDisplay(row, col);
-        } else {
-            moveToPrevCell();
-        }
+        handleBackspace();
+        const mobileInput = document.getElementById('mobile-keyboard-input');
+        if (mobileInput) mobileInput.value = ' ';
     } else if (key === 'Enter') {
         e.preventDefault();
         verifySelectedWord();

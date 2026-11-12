@@ -520,6 +520,22 @@ body {
     overflow-x: auto;
 }
 
+.mobile-hidden-input {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: transparent;
+    caret-color: transparent;
+    pointer-events: none;
+    z-index: -1;
+}
+
 .crossword-grid {
     display: grid;
     grid-template-columns: repeat(11, 44px);
