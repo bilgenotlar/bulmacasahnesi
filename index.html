@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulmaca Stüdyosu - Dinamik Kelime Bulmacası</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="studio">
+    <!-- Üst Kontrol Çubuğu -->
+ <!-- Üst Kontrol Çubuğu -->
+    <header class="top-bar">
+        <div class="brand">
+            <h1>Bulmaca Stüdyosu</h1>
+            <button class="daily-topic-badge" id="daily-topic-btn" onclick="selectDailyTopic()" title="Günün konusuna geç">
+                Bugünün Konusu: ...
+            </button>
+        </div>
+
+        <!-- Bulmaca Oluşturucu Seçenekleri -->
+        <div class="generator-controls">
+            <select id="category-select" class="control-select" title="Konu Seç" onchange="generateNewPuzzle()">
+                <option value="all">Bütün Konular</option>
+            </select>
+
+            <select id="difficulty-select" class="control-select" title="Zorluk Seviyesi" onchange="generateNewPuzzle()">
+                <option value="all">Tüm Seviyeler</option>
+                <option value="easy">Kolay</option>
+                <option value="medium">Orta</option>
+                <option value="hard">Zor</option>
+            </select>
+
+            <select id="wordcount-select" class="control-select" title="Kelime Sayısı" onchange="generateNewPuzzle()">
+                <option value="8">8 Kelime</option>
+                <option value="10"selected>10 Kelime</option>
+                <option value="12">12 Kelime</option>
+                <option value="15">15 Kelime</option>
+            </select>
+
+            <button class="btn btn-primary" onclick="generateNewPuzzle()">Yeni Bulmaca</button>
+        </div>
+
+        <!-- Tema & Genel Kontroller -->
+        <div class="controls">
+            <div class="theme-selector">
+                <button class="theme-btn active" data-theme="studio" onclick="changeTheme('studio')">Stüdyo</button>
+                <button class="theme-btn" data-theme="classic" onclick="changeTheme('classic')">Gazete</button>
+                <button class="theme-btn" data-theme="dark" onclick="changeTheme('dark')">Gece</button>
+                <button class="theme-btn" data-theme="sepia" onclick="changeTheme('sepia')">Sepya</button>
+            </div>
+
+            <div class="game-controls">
+                <button class="btn btn-outline" onclick="clearGrid()">Temizle</button>
+                <button class="btn btn-outline" onclick="showSolution()">Çözüm</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Üst İstatistik Kartları (4'lü Bilgi Şeridi) -->
+    <section class="stats-bar">
+        <div class="stat-card">
+            <span class="stat-label">TOPLAM SKOR</span>
+            <div class="stat-value" id="stat-score">0</div>
+            <span class="stat-sub">Harf puanları & bonuslar</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-label">3'LÜ SERİ BONUSU</span>
+            <div class="stat-value-row">
+                <span class="stat-value" id="stat-streak">0/3</span>
+                <span class="stat-bonus">+100 Puan</span>
+            </div>
+            <div class="streak-dots" id="streak-dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-label">TAMAMLANAN KELİMELER</span>
+            <div class="stat-value" id="stat-completed">0 / 8</div>
+            <span class="stat-sub stat-status" id="stat-status">Çözüm devam ediyor</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-label">GEÇEN SÜRE</span>
+            <div class="timer-pill">
+                <span class="timer-icon">⏱</span>
+                <span id="stat-timer">00:00</span>
+            </div>
+            <span class="stat-sub" id="stat-difficulty-badge">Standart Mod</span>
+        </div>
+    </section>
+
+    <!-- Ana Oyun Alanı -->
+    <main class="main-container">
+        <!-- Sol Panel: Bulmaca Izgarası & Aktif Soru Banner'ı -->
+        <section class="grid-section">
+            <div class="puzzle-header">
+                <div>
+                    <h2 id="puzzle-title">Karışık Konular</h2>
+                    <span class="puzzle-subtitle" id="puzzle-meta">KARIŞIK SEVİYE • 8 KELİME</span>
+                </div>
+                <div class="word-actions">
+                    <button class="btn btn-pill-outline" onclick="revealHint()" title="Seçili kareyi aç">? Harf Aç</button>
+                    <button class="btn btn-pill-magenta" onclick="verifySelectedWord()" title="Seçili kelimeyi doğrula">✓ Kelimeyi Onayla</button>
+                </div>
+            </div>
+
+            <!-- Aktif Soru Banner'ı -->
+            <div class="active-clue-banner" id="active-clue-banner">
+                <div class="banner-header">
+                    <span class="banner-badge" id="banner-direction">1 Yatay (5 Harf)</span>
+                </div>
+                <p class="banner-text" id="banner-clue-text">Başlamak için bir kareye veya sağdaki sorulardan birine tıklayın.</p>
+            </div>
+
+            <!-- Yüzen Kareler Izgarası -->
+            <div class="grid-wrapper">
+                <div class="crossword-grid" id="crossword-grid"></div>
+            </div>
+        </section>
+
+        <!-- Sağ Panel: İpuçları Rehberi -->
+        <section class="clues-section">
+            <div class="clues-panel-header">
+                <h3>İpuçları Rehberi</h3>
+                <span class="clues-progress" id="clues-progress">0/8 ÇÖZÜLDÜ</span>
+            </div>
+
+            <div class="clues-container">
+                <div class="clue-group">
+                    <h4>YATAY SORULAR</h4>
+                    <div class="clue-list" id="across-clues"></div>
+                </div>
+                <div class="clue-group">
+                    <h4>DİKEY SORULAR</h4>
+                    <div class="clue-list" id="down-clues"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Tamamlanma Tebrik Penceresi -->
+    <div class="modal-backdrop" id="completion-modal">
+        <div class="completion-card">
+            <div class="completion-icon">✓</div>
+            <h3>Tebrikler!</h3>
+            <p id="completion-stats">Bulmacayı başarıyla tamamladınız.</p>
+            <div class="completion-actions">
+                <button class="btn btn-primary" onclick="generateNewPuzzle()">Yeni Bulmaca Oluştur</button>
+                <button class="btn btn-outline" onclick="closeCompletionModal()">Bulmacaya Dön</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="wordbank.js"></script>
+    <script src="engine.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
