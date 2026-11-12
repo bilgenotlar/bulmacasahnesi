@@ -124,7 +124,6 @@ function generateNewPuzzle() {
             usedWords: usedWordsByCategory[category]
         });
 
-        // Havuz tükendiyse sıfırla ve bu bulmacadaki kelimeleri kaydet
         if (puzzle.poolExhausted) {
             usedWordsByCategory[category].clear();
         }
@@ -158,7 +157,6 @@ function loadPuzzle(puzzle) {
     renderPuzzle();
     updateStatsUI();
 
-    // İlk kelimeyi otomatik seçerek aktif banner'ı doldur (açılışta mobil klavyeyi zorlamadan)
     const firstWord = puzzle.across[0] || puzzle.down[0];
     if (firstWord) {
         gameState.selectedWord = firstWord;
@@ -217,7 +215,6 @@ function updateStatsUI() {
         statusEl.textContent = 'Çözüm devam ediyor';
     }
 
-    // 3'lü seri göstergesi
     const currentStreakStep = gameState.streak % 3;
     document.getElementById('stat-streak').textContent = `${currentStreakStep}/3`;
     const dots = document.querySelectorAll('#streak-dots .dot');
@@ -357,15 +354,25 @@ function selectWord(wordObj) {
     gameState.selectedCell = { row: wordObj.row, col: wordObj.col };
     highlightSelection();
     focusMobileKeyboard();
+
+    // Kullanıcı sağdaki/alttaki ipucuna tıkladıysa ızgarayı tekrar görüş alanına getir
+    const gridSection = document.querySelector('.grid-section');
+    if (gridSection && window.innerWidth <= 1080) {
+        gridSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 function focusMobileKeyboard() {
     const mobileInput = document.getElementById('mobile-keyboard-input');
-    if (mobileInput) {
-        // Silme (Backspace) tuşunun boş kutuda da tetiklenmesi için tampon boşluk karakteri
-        mobileInput.value = ' ';
-        mobileInput.focus({ preventScroll: true });
-    }
+    if (!mobileInput) return;
+
+    mobileInput.value = ' ';
+    mobileInput.focus({ preventScroll: true });
+
+    // Tablet (iPadOS / Android Tablet) tarayıcılarında klavyeyi kesin tetiklemek için seçim aralığı ata
+    try {
+        mobileInput.setSelectionRange(1, 1);
+    } catch (e) {}
 }
 
 function highlightSelection() {
@@ -401,15 +408,14 @@ function highlightSelection() {
         activeCell.classList.add('selected');
     }
 
-    // Sağdaki ipucu kartını vurgula
+    // Sağdaki ipucu kartını yalnızca vurgula (sayfayı aşağı kaydırmadan!)
     const activeClue = document.querySelector(`.clue-item[data-word-key="${getWordKey(word)}"]`);
     if (activeClue) {
         activeClue.classList.add('active');
-        activeClue.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }
 
-// === MOBİL SANAL KLAVYE DİNLEYİCİSİ (ANDROID & iOS) ===
+// === MOBİL & TABLET SANAL KLAVYE DİNLEYİCİSİ ===
 function setupMobileKeyboardListener() {
     const mobileInputEl = document.getElementById('mobile-keyboard-input');
     if (!mobileInputEl) return;
@@ -421,7 +427,6 @@ function setupMobileKeyboardListener() {
         }
 
         const val = mobileInputEl.value;
-        // Tampon boşluk silindiyse (mobilde geri/sil tuşuna basıldıysa)
         if (val.length === 0) {
             mobileInputEl.value = ' ';
             handleBackspace();
@@ -621,7 +626,6 @@ function markWordSolved(word) {
     gameState.solvedWords.add(key);
     gameState.streak += 1;
 
-    // Harf başına 10 puan + 3'lü seri bonusu (+100)
     let earned = word.word.length * 10;
     if (gameState.streak % 3 === 0) {
         earned += 100;
@@ -653,7 +657,6 @@ function revealHint() {
         const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
         cell.classList.add('correct');
 
-        // İpucu kullanıldığında seri sıfırlanır
         gameState.streak = 0;
         updateStatsUI();
 

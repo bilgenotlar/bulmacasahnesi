@@ -522,18 +522,18 @@ body {
 
 .mobile-hidden-input {
     position: fixed;
-    top: 40%;
-    left: 50%;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
+    top: 10px;
+    left: 10px;
+    width: 2px;
+    height: 2px;
+    opacity: 0.01;
     border: none;
     outline: none;
     background: transparent;
     color: transparent;
     caret-color: transparent;
-    pointer-events: none;
-    z-index: -1;
+    font-size: 16px; /* iOS/iPadOS otomatik yakınlaştırmayı (zoom) engeller */
+    z-index: 1;
 }
 
 .crossword-grid {
