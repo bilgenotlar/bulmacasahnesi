@@ -513,6 +513,7 @@ body {
 
 /* === YÜZEN KARELER IZGARASI === */
 .grid-wrapper {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -521,19 +522,20 @@ body {
 }
 
 .mobile-hidden-input {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    width: 2px;
-    height: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
     opacity: 0.01;
     border: none;
     outline: none;
     background: transparent;
     color: transparent;
     caret-color: transparent;
-    font-size: 16px; /* iOS/iPadOS otomatik yakınlaştırmayı (zoom) engeller */
-    z-index: 1;
+    font-size: 16px;
+    pointer-events: none;
+    z-index: 5;
 }
 
 .crossword-grid {

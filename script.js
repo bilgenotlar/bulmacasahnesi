@@ -369,7 +369,6 @@ function focusMobileKeyboard() {
     mobileInput.value = ' ';
     mobileInput.focus({ preventScroll: true });
 
-    // Tablet (iPadOS / Android Tablet) tarayıcılarında klavyeyi kesin tetiklemek için seçim aralığı ata
     try {
         mobileInput.setSelectionRange(1, 1);
     } catch (e) {}
@@ -402,13 +401,24 @@ function highlightSelection() {
         }
     }
 
-    // Aktif kareyi vurgula
+    // Aktif kareyi vurgula ve gizli klavye kutusunu tam bu karenin üzerine taşı
     const activeCell = document.querySelector(`.cell[data-row="${gameState.selectedCell.row}"][data-col="${gameState.selectedCell.col}"]`);
     if (activeCell) {
         activeCell.classList.add('selected');
+
+        const mobileInput = document.getElementById('mobile-keyboard-input');
+        if (mobileInput) {
+            mobileInput.style.top = `${activeCell.offsetTop}px`;
+            mobileInput.style.left = `${activeCell.offsetLeft}px`;
+        }
+
+        // Mobilde aktif kare klavyenin altında kalıyorsa nazikçe görüş alanına getir
+        if (window.innerWidth <= 768) {
+            activeCell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
     }
 
-    // Sağdaki ipucu kartını yalnızca vurgula (sayfayı aşağı kaydırmadan!)
+    // Sağdaki ipucu kartını vurgula
     const activeClue = document.querySelector(`.clue-item[data-word-key="${getWordKey(word)}"]`);
     if (activeClue) {
         activeClue.classList.add('active');
