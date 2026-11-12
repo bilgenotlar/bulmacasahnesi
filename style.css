@@ -151,12 +151,48 @@ body {
 .brand {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
+.brand-titles {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.studio-presenter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.15rem;
+}
+
+.maviblue-logo {
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #1d4ed8;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #bfdbfe;
+    padding: 0.1rem 0.45rem;
+    border-radius: 6px;
+}
+
+.maviblue-logo span {
+    color: #0284c7;
+}
+
+.studio-text {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+}
+
 .brand h1 {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 800;
     letter-spacing: -0.02em;
     color: var(--primary);
