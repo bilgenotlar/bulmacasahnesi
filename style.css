@@ -1,0 +1,774 @@
+/* === TEMA DEĞİŞKENLERİ === */
+:root,
+[data-theme="studio"] {
+    --bg-primary: #f8f5fc;
+    --bg-gradient: linear-gradient(135deg, #fbf9fe 0%, #f3ecfa 100%);
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f3e8ff;
+    --clue-card-bg: #f6effc;
+    --text-primary: #1e1b4b;
+    --text-secondary: #5b5270;
+    --text-muted: #8b80a3;
+    --border-color: #e9d8fd;
+    --cell-bg: #ffffff;
+    --cell-border: #c4b5fd;
+    --cell-selected-border: #c026d3;
+    --cell-word-bg: #ede9fe;
+    --cell-word-border: #8b5cf6;
+    --cell-correct-bg: #dcfce7;
+    --cell-correct-border: #16a34a;
+    --cell-incorrect-bg: #fee2e2;
+    --cell-incorrect-border: #dc2626;
+    --primary: #7e22ce;
+    --primary-hover: #6b21a8;
+    --magenta: #c026d3;
+    --magenta-hover: #a21caf;
+    --bonus-blue: #0284c7;
+    --success-green: #16a34a;
+    --shadow: 0 4px 20px rgba(126, 34, 206, 0.06);
+    --card-shadow: 0 2px 12px rgba(126, 34, 206, 0.05);
+}
+
+/* Gazete Teması */
+[data-theme="classic"] {
+    --bg-primary: #fafaf9;
+    --bg-gradient: none;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f5f5f4;
+    --clue-card-bg: #f5f5f4;
+    --text-primary: #1c1917;
+    --text-secondary: #57534e;
+    --text-muted: #a8a29e;
+    --border-color: #d6d3d1;
+    --cell-bg: #ffffff;
+    --cell-border: #a8a29e;
+    --cell-selected-border: #0f172a;
+    --cell-word-bg: #fef3c7;
+    --cell-word-border: #d97706;
+    --cell-correct-bg: #dcfce7;
+    --cell-correct-border: #16a34a;
+    --cell-incorrect-bg: #fee2e2;
+    --cell-incorrect-border: #dc2626;
+    --primary: #0f172a;
+    --primary-hover: #334155;
+    --magenta: #0f172a;
+    --magenta-hover: #334155;
+    --bonus-blue: #0369a1;
+    --success-green: #15803d;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --card-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Gece Teması */
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #17153b 100%);
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #2e294e;
+    --clue-card-bg: #262341;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #3b3561;
+    --cell-bg: #1e293b;
+    --cell-border: #6d28d9;
+    --cell-selected-border: #e879f9;
+    --cell-word-bg: #312e81;
+    --cell-word-border: #a78bfa;
+    --cell-correct-bg: #14532d;
+    --cell-correct-border: #4ade80;
+    --cell-incorrect-bg: #7f1d1d;
+    --cell-incorrect-border: #f87171;
+    --primary: #9333ea;
+    --primary-hover: #7e22ce;
+    --magenta: #d946ef;
+    --magenta-hover: #c026d3;
+    --bonus-blue: #38bdf8;
+    --success-green: #4ade80;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Sepya Teması */
+[data-theme="sepia"] {
+    --bg-primary: #f5efe6;
+    --bg-gradient: none;
+    --bg-secondary: #fbf8f3;
+    --bg-tertiary: #ebe3d5;
+    --clue-card-bg: #f0e8da;
+    --text-primary: #3e2723;
+    --text-secondary: #5d4037;
+    --text-muted: #8d6e63;
+    --border-color: #d7ccc8;
+    --cell-bg: #fbf8f3;
+    --cell-border: #bcaaa4;
+    --cell-selected-border: #8d6e63;
+    --cell-word-bg: #ffe0b2;
+    --cell-word-border: #fb8c00;
+    --cell-correct-bg: #c8e6c9;
+    --cell-correct-border: #388e3c;
+    --cell-incorrect-bg: #ffcdd2;
+    --cell-incorrect-border: #d32f2f;
+    --primary: #6d4c41;
+    --primary-hover: #4e342e;
+    --magenta: #8d6e63;
+    --magenta-hover: #6d4c41;
+    --bonus-blue: #0277bd;
+    --success-green: #2e7d32;
+    --shadow: 0 2px 10px rgba(62, 39, 35, 0.08);
+    --card-shadow: 0 1px 6px rgba(62, 39, 35, 0.06);
+}
+
+/* === GENEL AYARLAR === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    background: var(--bg-primary);
+    background-image: var(--bg-gradient);
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* === ÜST BAR === */
+.top-bar {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.85rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--card-shadow);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+}
+
+.brand h1 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+}
+
+.daily-topic-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.32rem 0.85rem;
+    background: var(--bg-tertiary);
+    color: var(--primary);
+    border: 1.5px solid var(--border-color);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.daily-topic-badge:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.generator-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.control-select {
+    padding: 0.48rem 0.85rem;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.control-select:hover,
+.control-select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* === TEMA SEÇİCİ === */
+.theme-selector {
+    display: flex;
+    gap: 0.2rem;
+    background: var(--bg-tertiary);
+    padding: 0.25rem;
+    border-radius: 10px;
+}
+
+.theme-btn {
+    padding: 0.35rem 0.75rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.theme-btn.active {
+    background: var(--bg-secondary);
+    color: var(--primary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* === BUTONLAR === */
+.game-controls {
+    display: flex;
+    gap: 0.45rem;
+}
+
+.btn {
+    padding: 0.48rem 1rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1.5px solid transparent;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+.btn-outline:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-pill-outline {
+    background: var(--bg-secondary);
+    color: var(--primary);
+    border: 1.5px solid var(--border-color);
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    font-weight: 600;
+}
+
+.btn-pill-outline:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--primary);
+}
+
+.btn-pill-magenta {
+    background: var(--magenta);
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(192, 38, 211, 0.25);
+}
+
+.btn-pill-magenta:hover {
+    background: var(--magenta-hover);
+    transform: translateY(-1px);
+}
+
+/* === ÜST 4'LÜ İSTATİSTİK KARTLARI === */
+.stats-bar {
+    max-width: 1360px;
+    margin: 1.25rem auto 0;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.35rem;
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+}
+
+.stat-value-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--magenta);
+    line-height: 1.1;
+}
+
+.stat-bonus {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--bonus-blue);
+}
+
+.stat-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.stat-status {
+    color: var(--success-green);
+    font-weight: 600;
+}
+
+.streak-dots {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.15rem;
+}
+
+.streak-dots .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    background: transparent;
+    transition: all 0.25s;
+}
+
+.streak-dots .dot.filled {
+    background: var(--magenta);
+    border-color: var(--magenta);
+    transform: scale(1.1);
+}
+
+.timer-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: var(--bg-tertiary);
+    color: var(--magenta);
+    font-weight: 800;
+    font-size: 1.15rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    width: fit-content;
+}
+
+/* === ANA OYUN KONTEYNERİ === */
+.main-container {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.5rem;
+    max-width: 1360px;
+    margin: 1.25rem auto 2rem;
+    padding: 0 1.5rem;
+}
+
+/* === SOL PANEL: BULMACA KARTI === */
+.grid-section {
+    background: var(--bg-secondary);
+    padding: 1.75rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.puzzle-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.puzzle-header h2 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.puzzle-subtitle {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+}
+
+.word-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+/* === AKTİF SORU BANNER'I === */
+.active-clue-banner {
+    background: var(--clue-card-bg);
+    border-left: 4px solid var(--primary);
+    border-radius: 12px;
+    padding: 0.95rem 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.banner-header {
+    margin-bottom: 0.35rem;
+}
+
+.banner-badge {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.banner-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.45;
+}
+
+/* === YÜZEN KARELER IZGARASI === */
+.grid-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+    overflow-x: auto;
+}
+
+.crossword-grid {
+    display: grid;
+    grid-template-columns: repeat(11, 44px);
+    grid-template-rows: repeat(11, 44px);
+    gap: 5px;
+    background: transparent;
+}
+
+.cell {
+    background: var(--cell-bg);
+    border: 2px solid var(--cell-border);
+    border-radius: 9px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 2px 5px rgba(126, 34, 206, 0.06);
+    transition: all 0.16s ease;
+}
+
+.cell:hover:not(.black) {
+    transform: translateY(-1px);
+    border-color: var(--primary);
+}
+
+/* Boş alanlar görünmez (Yüzen Bulmaca Tarzı) */
+.cell.black {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Seçili kelimenin tüm harf kutuları */
+.cell.word-highlight {
+    background: var(--cell-word-bg);
+    border-color: var(--cell-word-border);
+}
+
+/* Aktif imleç karesi */
+.cell.selected {
+    background: var(--cell-bg);
+    border: 2.5px solid var(--cell-selected-border);
+    box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.18);
+    transform: scale(1.04);
+    z-index: 2;
+}
+
+/* Doğru ve Yanlış durumları */
+.cell.correct {
+    background: var(--cell-correct-bg);
+    border-color: var(--cell-correct-border);
+}
+
+.cell.incorrect {
+    background: var(--cell-incorrect-bg);
+    border-color: var(--cell-incorrect-border);
+}
+
+.cell-number {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.cell-letter {
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+/* === SAĞ PANEL: İPUÇLARI REHBERİ === */
+.clues-section {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+}
+
+.clues-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.9rem;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.clues-panel-header h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.clues-progress {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--bg-tertiary);
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+}
+
+.clues-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.clue-group h4 {
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--magenta);
+    margin-bottom: 0.75rem;
+}
+
+.clue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.clue-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.8rem 0.95rem;
+    background: var(--clue-card-bg);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-size: 0.92rem;
+    line-height: 1.4;
+}
+
+.clue-item:hover {
+    border-color: var(--cell-border);
+    transform: translateX(2px);
+}
+
+.clue-item.active {
+    background: var(--bg-secondary);
+    border-color: var(--magenta);
+    box-shadow: 0 4px 12px rgba(192, 38, 211, 0.12);
+}
+
+.clue-pill {
+    flex-shrink: 0;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-top: 1px;
+}
+
+.clue-body {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.clue-length {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Çözülmüş ipucu kartları (soluk görünüm) */
+.clue-item.solved {
+    background: transparent;
+    border-color: var(--border-color);
+    opacity: 0.48;
+}
+
+.clue-item.solved .clue-pill {
+    background: var(--text-muted);
+    color: #ffffff;
+}
+
+.clue-item.solved .clue-body {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.clue-item.solved.active {
+    opacity: 0.85;
+    border-color: var(--magenta);
+    background: var(--bg-secondary);
+}
+
+/* === TAMAMLANMA PENCERESİ === */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 27, 75, 0.55);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-backdrop.visible {
+    display: flex;
+}
+
+.completion-card {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2.25rem;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(126, 34, 206, 0.22);
+}
+
+.completion-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: var(--magenta);
+    color: #ffffff;
+    font-size: 1.7rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.completion-card h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.completion-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.completion-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1080px) {
+    .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .clues-section {
+        max-height: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .stats-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .crossword-grid {
+        zoom: 0.68;
+    }
+}
