@@ -28,7 +28,8 @@ const CATEGORIES = {
     tarih: 'Tarih',
     muzik: 'Müzik',
     spor: 'Spor',
-    mitoloji: 'Mitoloji'
+    mitoloji: 'Mitoloji',
+	ulkeler: 'Ülkeler'
 };
 
 const RAW_WORDS = {
@@ -360,6 +361,38 @@ const RAW_WORDS = {
         PROMETHEUS | Ateşi tanrılardan çalıp insanlara veren Titan
         OLİMPOS | Yunan tanrılarının yaşadığına inanılan kutsal dağ
         ANKA | Küllerinden yeniden doğan efsanevi kuş, Zümrüdüanka
+    `,
+	  ulkeler: `
+        ALMANYA | Başkenti Berlin olan, resmî dili Almanca olan ve euro para birimini kullanan Orta Avrupa ülkesi
+ANGOLA | Başkenti Luanda olan, resmî dili Portekizce olan ve kwanza para birimini kullanan Güneybatı Afrika ülkesi
+ANDORRA | Başkenti Andorra la Vella olan, resmî dili Katalanca olan Batı Avrupa ülkesi
+ARJANTİN | Başkenti Buenos Aires olan, resmî dili İspanyolca olan Güney Amerika ülkesi
+BAHAMALAR | Başkenti Nassau olan, resmî dili İngilizce olan Karayipler'deki adalar ülkesi
+BAHREYN | Başkenti Manama olan, resmî dili Arapça olan Basra Körfezi ülkesi
+BANGLADEŞ | Başkenti Dakka olan, resmî dili Bengalce olan Güney Asya ülkesi
+BARBADOS | Başkenti Bridgetown olan, resmî dili İngilizce olan Karayipler ülkesi
+BELÇİKA | Başkenti Brüksel olan, Felemenkçe, Fransızca ve Almanca resmî dillerine sahip Orta Avrupa ülkesi
+BELİZE | Başkenti Belmopan olan, resmî dili İngilizce olan Kuzey Amerika ülkesi
+BENİN | Başkenti Porto-Novo olan, resmî dili Fransızca olan Batı Afrika ülkesi
+BELARUS | Başkenti Minsk olan, resmî dili Rusça olan Kuzey Avrupa ülkesi
+BHUTAN | Başkenti Thimphu olan, resmî dili Dzongka olan Hint Anakarası ülkesi
+BOLİVYA | Başkenti Sucre olan, resmî dilleri İspanyolca ve Keçuva olan Güney Amerika ülkesi
+BOTSVANA | Başkenti Gaborone olan, pula para birimini kullanan Güney Afrika ülkesi
+BREZİLYA | Başkenti Brasilia olan, resmî dili Portekizce olan ve Güney Amerika'da yer alan ülke
+BRUNEİ | Başkenti Bandar Seri Begavan olan, resmî dili Malayca olan Borneo Adası ülkesi
+BURUNDİ | Başkenti Gitega olan, resmî dilleri Fransızca ve Rundice olan Orta Afrika ülkesi
+CEZAYİR | Başkenti kendi adıyla aynı olan, resmî dili Arapça olan Kuzey Afrika ülkesi
+CİBUTİ | Başkenti kendi adıyla aynı olan, Arapça ve Fransızca konuşulan Doğu Afrika ülkesi
+ÇAD | Başkenti Encemine olan, Fransızca ve Arapça konuşulan Orta Afrika ülkesi.
+ÇEKYA | Başkenti Prag olan, resmî dili Çekçe olan ve Çek korunası kullanan Doğu Avrupa ülkesi
+ÇİN | Başkenti Pekin olan, resmî dili Çince olan ve Doğu Asya'da yer alan ülke
+GABON | Başkenti Libreville olan, resmî dili Fransızca olan Orta Afrika ülkesi
+GAMBİYA | Başkenti Banjul olan, resmî dili İngilizce olan Batı Afrika ülkesi
+GANA | Başkenti Akra olan, cedi para birimini kullanan Batı Afrika ülkesi
+GİNE | Başkenti Konakri olan, resmî dili Fransızca olan Batı Afrika ülkesi
+GUYANA | Başkenti Georgetown olan, resmî dili İngilizce olan Güney Amerika ülkesi
+JAPONYA | Başkenti Tokyo olan, resmî dili Japonca olan ve yen para birimini kullanan Uzak Doğu ada ülkesi.
+KANADA | Başkenti Ottawa olan, İngilizce ve Fransızca konuşulan Kuzey Amerika ülkesi
     `
 };
 
